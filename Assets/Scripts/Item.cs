@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item
+public abstract class Item
 {
     //Properties
     string name;
     int weightValue;
 
     //Constructor
-    public Item(string name, int weightValue)
+    protected Item(string name, int weightValue)
     {
         this.name = name;
         this.weightValue = weightValue;
     }
 
-
-    public Item(int weightValue)
+    protected Item(int weightValue)
     {
         this.name = "DefaultName";
         this.weightValue = weightValue;
