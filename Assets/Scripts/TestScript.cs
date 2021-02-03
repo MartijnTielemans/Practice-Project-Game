@@ -15,14 +15,12 @@ public class TestScript : MonoBehaviour
     {
         // Make an Item, not accessitem, because then is the same type as the rest of the items
         Item key = new AccessItem("Gold Key", 10, 0);
-
         DebugLogItem(key);
     }
 
     public void TestCreateBonusItem()
     {
         Item candy = new BonusItem("Chocolate Bar", 2, 250);
-
         DebugLogItem(candy);
     }
 
