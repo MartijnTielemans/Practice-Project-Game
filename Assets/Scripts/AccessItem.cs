@@ -15,4 +15,9 @@ public class AccessItem : Item
     {
         return doorID;
     }
+
+    public bool OpensDoor(int ID)
+    {
+        return doorID == ID;
+    }
 }

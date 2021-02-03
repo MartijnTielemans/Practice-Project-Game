@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
+    public InventoryScript inventory;
+
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("============ Testing Item Creation ===============");
         TestCreateAccessItem();
         TestCreateBonusItem();
+
+
+        Debug.Log("============ Testing Inventory functions ===============");
+        TestInventoryFunction();
     }
 
     public void TestCreateAccessItem()
@@ -22,6 +29,54 @@ public class TestScript : MonoBehaviour
     {
         Item candy = new BonusItem("Chocolate Bar", 2, 250);
         DebugLogItem(candy);
+    }
+
+    public void TestInventoryFunction()
+    {
+        Item key = new AccessItem("Gold Key", 20, 0);
+        Item chocolateBar = new BonusItem("Chocolate Bar", 60, 250);
+        Item popsicle = new BonusItem("Popsicle", 50, 100);
+
+        if (inventory.AddItem(key))
+        {
+            Debug.Log("Added " + key.GetItemName() + " to the inventory.");
+        }
+        else
+        {
+            Debug.Log(" Failed to add " + key.GetItemName() + " to the inventory.");
+        }
+
+        if (inventory.AddItem(chocolateBar))
+        {
+            Debug.Log("Added " + key.GetItemName() + " to the inventory.");
+        }
+        else
+        {
+            Debug.Log(" Failed to add " + key.GetItemName() + " to the inventory.");
+        }
+
+        if (inventory.AddItem(popsicle))
+        {
+            Debug.Log("Added " + key.GetItemName() + " to the inventory.");
+        }
+        else
+        {
+            Debug.Log(" Failed to add " + key.GetItemName() + " to the inventory.");
+        }
+
+        inventory.DebugInventory();
+
+        for (int i = 0; i < 2; i++)
+        {
+            if (inventory.CanOpenDoor(i))
+            {
+                Debug.Log("opened door with the ID: " + i);
+            }
+            else
+            {
+                Debug.Log("Failed to open door with the ID: " + i);
+            }
+        }
     }
 
     void DebugLogItem(Item item)
