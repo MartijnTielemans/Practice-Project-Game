@@ -7,12 +7,13 @@ public class TestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Item key = new Item("Gold Key", 10);
+        TestCreateItem();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TestCreateItem()
     {
-        
+        Item key = new Item("Gold Key", 10);
+
+        Debug.Log("Item: " + key.GetItemName() + ", Weight: " + key.GetWeightValue());
     }
 }

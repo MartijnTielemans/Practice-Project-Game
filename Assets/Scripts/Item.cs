@@ -23,5 +23,13 @@ public class Item
     }
 
     //Methods
+    public string GetItemName()
+    {
+        return name;
+    }
 
+    public int GetWeightValue()
+    {
+        return weightValue;
+    }
 }
