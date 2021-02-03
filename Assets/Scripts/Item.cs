@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item
 {
-    // Start is called before the first frame update
-    void Start()
+    //Properties
+    string name;
+    int weightValue;
+
+    //Constructor
+    public Item(string name, int weightValue)
     {
-        
+        this.name = name;
+        this.weightValue = weightValue;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public Item(int weightValue)
     {
-        
+        this.name = "DefaultName";
+        this.weightValue = weightValue;
     }
+
+    //Methods
+
 }
