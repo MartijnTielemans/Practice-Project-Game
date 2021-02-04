@@ -20,4 +20,18 @@ public class PlayerManager : MonoBehaviour
     {
         
     }
+
+    public bool AddItem (Item item)
+    {
+        return (inventory.AddItem(item));
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("Interactable"))
+        {
+            IInteractable i = hit.gameObject.GetComponent<IInteractable>();
+            i.Action(this);
+        }
+    }
 }
