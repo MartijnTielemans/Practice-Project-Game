@@ -34,4 +34,9 @@ public class PlayerManager : MonoBehaviour
             i.Action(this);
         }
     }
+
+    public InventoryScript GetInventory()
+    {
+        return inventory;
+    }
 }

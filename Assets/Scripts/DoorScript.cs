@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour, IInteractable
 {
+    public int doorID = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject.tag = "Interactable";
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Action(PlayerManager player)
     {
-        
-    }
-
-    public void Action()
-    {
-
+        if (player.GetInventory().CanOpenDoor(doorID))
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("Cannot open this door, it's ID is: " + doorID);
+        }
     }
 }
