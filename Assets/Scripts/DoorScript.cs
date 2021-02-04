@@ -6,17 +6,20 @@ public class DoorScript : MonoBehaviour, IInteractable
 {
     public int doorID = 0;
 
+    Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         gameObject.tag = "Interactable";
+        anim = GetComponent<Animator>();
     }
 
     public void Action(PlayerManager player)
     {
         if (player.GetInventory().CanOpenDoor(doorID))
         {
-            Destroy(gameObject);
+            anim.SetBool("Open", true);
         }
         else
         {
