@@ -118,28 +118,9 @@ public class TestScript : MonoBehaviour
         Debug.Log("Your answer is: " + answer);
 
         // Check if the answer is correct for both riddles
-        CheckRiddleAnswer(knightRiddle);
 
-        CheckRiddleAnswer(kingRiddle);
-    }
-
-    void CheckRiddleAnswer(Item riddle)
-    {
-        if (riddle is PuzzleItem)
-        {
-            PuzzleItem puzzleRiddle = (PuzzleItem)riddle;
-
-            if (puzzleRiddle.RiddleSolved(answer))
-            {
-                Debug.Log("You solved the " + puzzleRiddle.GetItemName() + "!");
-            }
-            else
-            {
-                Debug.Log("You did not solve the " + puzzleRiddle.GetItemName() + "..");
-            }
-
-            Debug.Log("The answer was: " + (puzzleRiddle.GetAnswer()));
-        }
+        ((PuzzleItem)knightRiddle).RiddleSolved(answer);
+        ((PuzzleItem)kingRiddle).RiddleSolved(answer);
     }
 
     void DebugLogItem(Item item)

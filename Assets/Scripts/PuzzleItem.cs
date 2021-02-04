@@ -13,11 +13,22 @@ public class PuzzleItem : Item
     {
         this.riddle = riddle;
         this.riddleAnswer = riddleAnswer;
+        this.solved = false;
     }
 
     public bool RiddleSolved (string answer)
     {
-        return (answer == this.riddleAnswer);
+        if (solved = (answer == this.riddleAnswer))
+        {
+            Debug.Log("You solved the " + GetItemName() + "!");
+        }
+        else
+        {
+            Debug.Log("You did not solve the " + GetItemName() + "..");
+        }
+
+        Debug.Log("The answer was: " + (GetAnswer()));
+        return solved;
     }
 
     public string GetAnswer()
