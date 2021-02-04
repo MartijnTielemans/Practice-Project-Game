@@ -2,12 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryScript : MonoBehaviour
+public class InventoryScript
 {
-    List<Item> Inventory = new List<Item>();
+    List<Item> Inventory;
 
-    int totalWeight = 0;
-    public int maxWeight = 120;
+    int totalWeight;
+    private int maxWeight;
+
+    public InventoryScript()
+    {
+        Inventory = new List<Item>();
+        totalWeight = 0;
+        maxWeight = 120;
+    }
+
+    public InventoryScript(int maxWeight) : this()
+    {
+        this.maxWeight = maxWeight;
+    }
 
     // Add an item to the inventory list, if it succeeded in finding it and it wouldn't exceed the maxWeight
     public bool AddItem(Item i)
