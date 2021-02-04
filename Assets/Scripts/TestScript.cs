@@ -6,16 +6,22 @@ public class TestScript : MonoBehaviour
 {
     public InventoryScript inventory;
 
+    string answer;
+
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("============ Testing Item Creation ===============");
-        TestCreateAccessItem();
-        TestCreateBonusItem();
+        //Debug.Log("============ Testing Item Creation ===============");
+        //TestCreateAccessItem();
+        //TestCreateBonusItem();
 
 
-        Debug.Log("============ Testing Inventory functions ===============");
-        TestInventoryFunction();
+        //Debug.Log("============ Testing Inventory functions ===============");
+        //TestInventoryFunction();
+
+
+        Debug.Log("============ Testing Riddle Puzzle ===============");
+        TestRiddlePuzzle();
     }
 
     public void TestCreateAccessItem()
@@ -76,6 +82,63 @@ public class TestScript : MonoBehaviour
             {
                 Debug.Log("Failed to open door with the ID: " + i);
             }
+        }
+    }
+
+    void TestRiddlePuzzle()
+    {
+        // Create 2 riddles
+        Item knightRiddle = new PuzzleItem("The knight's riddle", 10, "There once was a cow who lived in a barn, How many spots did it have?", "6");
+        Item kingRiddle = new PuzzleItem("The king's riddle", 30, "If I had 20 grains of rice, and I ate 4, how many do I have left?", "16");
+
+        // Add the riddles to the inventory
+        if (inventory.AddItem(knightRiddle))
+        {
+            Debug.Log("Added " + knightRiddle.GetItemName() + " to the inventory.");
+        }
+        else
+        {
+            Debug.Log("Failed to add " + knightRiddle.GetItemName() + " to the inventory.");
+        }
+
+        if (inventory.AddItem(kingRiddle))
+        {
+            Debug.Log("Added " + kingRiddle.GetItemName() + " to the inventory.");
+        }
+        else
+        {
+            Debug.Log("Failed to add " + kingRiddle.GetItemName() + " to the inventory.");
+        }
+
+        // Check the inventory
+        inventory.DebugInventory();
+
+        // set the answer value
+        answer = "6";
+        Debug.Log("Your answer is: " + answer);
+
+        // Check if the answer is correct for both riddles
+        CheckRiddleAnswer(knightRiddle);
+
+        CheckRiddleAnswer(kingRiddle);
+    }
+
+    void CheckRiddleAnswer(Item riddle)
+    {
+        if (riddle is PuzzleItem)
+        {
+            PuzzleItem puzzleRiddle = (PuzzleItem)riddle;
+
+            if (puzzleRiddle.RiddleSolved(answer))
+            {
+                Debug.Log("You solved the " + puzzleRiddle.GetItemName() + "!");
+            }
+            else
+            {
+                Debug.Log("You did not solve the " + puzzleRiddle.GetItemName() + "..");
+            }
+
+            Debug.Log("The answer was: " + (puzzleRiddle.GetAnswer()));
         }
     }
 
