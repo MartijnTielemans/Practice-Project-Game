@@ -9,6 +9,8 @@ public class TestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inventory = new InventoryScript();
+
         Debug.Log("============ Testing Item Creation ===============");
         TestCreateAccessItem();
         TestCreateBonusItem();
