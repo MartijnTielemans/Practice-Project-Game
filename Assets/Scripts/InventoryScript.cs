@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryScript
 {
     List<Item> Inventory;
+    List<GameObject> GameObjects;
 
     int totalWeight;
     private int maxWeight;
@@ -12,6 +13,7 @@ public class InventoryScript
     public InventoryScript()
     {
         Inventory = new List<Item>();
+        GameObjects = new List<GameObject>();
         totalWeight = 0;
         maxWeight = 120;
     }
@@ -19,6 +21,24 @@ public class InventoryScript
     public InventoryScript(int maxWeight) : this()
     {
         this.maxWeight = maxWeight;
+    }
+
+    // For dropping the last item
+    public GameObject DropLastItem()
+    {
+        GameObject go = RemoveItem(Inventory.Count - 1);
+
+        return go;
+    }
+
+    public bool AddItem(Item i, GameObject go)
+    {
+        bool result = AddItem(i);
+
+        if (result)
+            GameObjects.Add(go);
+
+        return result;
     }
 
     // Add an item to the inventory list, if it succeeded in finding it and it wouldn't exceed the maxWeight
@@ -36,6 +56,22 @@ public class InventoryScript
         }
     }
 
+    public GameObject RemoveItem(int i)
+    {
+        bool success = RemoveItem(Inventory[i]);
+
+        // Removes the item from te gameobjects list as well
+        if (success)
+        {
+            GameObject returnObject = GameObjects[i];
+            GameObjects.Remove(returnObject);
+
+            return returnObject;
+        }
+
+        return null;
+    }
+
     // Remove an item from the inventory list, if it succeeded in finding it
     public bool RemoveItem(Item i)
     {
@@ -43,19 +79,6 @@ public class InventoryScript
 
         if (success)
             totalWeight -= i.GetWeightValue();
-
-        return success;
-    }
-
-    public bool DropItem(Item i)
-    {
-        bool success = Inventory.Remove(i);
-
-        if (success)
-        {
-            totalWeight -= i.GetWeightValue();
-            // TODO: Add Item prefab spawn for Item i
-        }
 
         return success;
     }
@@ -73,16 +96,14 @@ public class InventoryScript
         {
             if (item is AccessItem)
             {
-                AccessItem i = ((AccessItem)item);
-
-                if (i.OpensDoor(ID))
+                if (((AccessItem)item).OpensDoor(ID))
                 {
                     result = true;
 
-                    if (i.GetOneUse())
-                    {
-                        RemoveItem(item);
-                    }
+                    //if (((AccessItem)item).GetOneUse())
+                    //{
+                    //    RemoveItem(item);
+                    //}
                 }
             }
         }

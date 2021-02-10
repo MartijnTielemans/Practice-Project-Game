@@ -18,13 +18,13 @@ public class AccessItem : Item
         return doorID;
     }
 
-    public bool GetOneUse()
-    {
-        return oneUse;
-    }
-
     public bool OpensDoor(int ID)
     {
         return doorID == ID;
+    }
+
+    public bool GetOneUse()
+    {
+        return oneUse;
     }
 }

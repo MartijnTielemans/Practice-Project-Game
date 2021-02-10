@@ -18,12 +18,30 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Drop"))
+        {
+            RemoveLastItem();
+        }
     }
 
-    public bool AddItem (Item item)
+    public bool AddItem (Item item, GameObject go)
     {
-        return (inventory.AddItem(item));
+        return (inventory.AddItem(item, go));
+    }
+
+    public void RemoveLastItem()
+    {
+        GameObject go = inventory.DropLastItem();
+
+        // Check if go returns null
+        if (go != null)
+        {
+            // Set the GameObject's position
+            go.transform.position = (transform.position + (transform.forward * 2));
+
+            // Set the GameObject to be active again
+            go.SetActive(true);
+        }
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
