@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
     InventoryScript inventory;
+
+    [SerializeField]
+    TextMeshProUGUI weightText;
 
     [SerializeField]
     int initialMaxWeight = 120;
@@ -13,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         inventory = new InventoryScript(initialMaxWeight);
+        UpdateWeightText(weightText);
     }
 
     // Update is called once per frame
@@ -22,7 +27,7 @@ public class PlayerManager : MonoBehaviour
         {
             RaycastHit hit;
 
-            if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hit))
+            if (Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, 2))
             {
                 IInteractable i = hit.collider.gameObject.GetComponent<IInteractable>();
                 if (i != null)
@@ -34,33 +39,44 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetButtonDown("Drop"))
         {
-            DropItem(10, transform.forward * 2);
+            DropItem(10);
         }
     }
 
-    public void DropItem(int id, Vector3 position)
+    public void DropItem(int id)
     {
         Item i = inventory.GetItemWithID(id);
 
         if (i != null)
         {
-            inventory.RemoveItem(i);
-            GameManager.Instance.DropItem(id, position);
+            if (inventory.RemoveItem(i))
+            {
+                UpdateWeightText(weightText);
+            }
+            GameManager.Instance.DropItem(id, transform.position + transform.forward * 2);
         }
     }
 
     public bool AddItem (Item item)
     {
-        return (inventory.AddItem(item));
-    }
+        bool success = false;
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        
+        if (inventory.AddItem(item))
+        {
+            UpdateWeightText(weightText);
+            success = true;
+        }
+
+        return success;
     }
 
     public InventoryScript GetInventory()
     {
         return inventory;
+    }
+
+    public void UpdateWeightText(TextMeshProUGUI text)
+    {
+        text.text = "" + inventory.GetCurrentWeight() + " / " + inventory.GetMaxWeight();
     }
 }

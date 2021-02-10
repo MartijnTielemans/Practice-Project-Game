@@ -8,6 +8,8 @@ public class InventoryScript
 
     int totalWeight;
     private int maxWeight;
+    int filledSlots;
+    private int maxSlots = 6;
 
     public InventoryScript()
     {
@@ -24,10 +26,14 @@ public class InventoryScript
     // Add an item to the inventory list, if it succeeded in finding it and it wouldn't exceed the maxWeight
     public bool AddItem(Item i)
     {
-        if ((totalWeight + i.GetWeightValue()) <= maxWeight)
+        if ((totalWeight + i.GetWeightValue()) <= maxWeight && filledSlots < maxSlots)
         {
             Inventory.Add(i);
             totalWeight += i.GetWeightValue();
+            filledSlots++;
+
+            Debug.Log("Current slots filled: " + filledSlots);
+
             return true;
         }
         else
@@ -42,7 +48,12 @@ public class InventoryScript
         bool success = Inventory.Remove(i);
 
         if (success)
+        {
             totalWeight -= i.GetWeightValue();
+            filledSlots--;
+
+            Debug.Log("Current slots filled: " + filledSlots);
+        }
 
         return success;
     }
@@ -78,11 +89,6 @@ public class InventoryScript
                 if (i.OpensDoor(ID))
                 {
                     result = true;
-
-                    //if (i.GetOneUse())
-                    //{
-                    //    RemoveItem(item);
-                    //}
                 }
             }
         }
@@ -98,6 +104,11 @@ public class InventoryScript
     public int GetCurrentWeight()
     {
         return totalWeight;
+    }
+
+    public int GetMaxWeight()
+    {
+        return maxWeight;
     }
 
     public void DebugInventory()
