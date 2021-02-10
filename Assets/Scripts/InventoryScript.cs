@@ -47,19 +47,6 @@ public class InventoryScript
         return success;
     }
 
-    public bool DropItem(Item i)
-    {
-        bool success = Inventory.Remove(i);
-
-        if (success)
-        {
-            totalWeight -= i.GetWeightValue();
-            // TODO: Add Item prefab spawn for Item i
-        }
-
-        return success;
-    }
-
     public bool HasItem(Item i)
     {
         return Inventory.Contains(i);
@@ -79,10 +66,10 @@ public class InventoryScript
                 {
                     result = true;
 
-                    if (i.GetOneUse())
-                    {
-                        RemoveItem(item);
-                    }
+                    //if (i.GetOneUse())
+                    //{
+                    //    RemoveItem(item);
+                    //}
                 }
             }
         }
