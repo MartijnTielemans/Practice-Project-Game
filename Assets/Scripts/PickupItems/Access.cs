@@ -9,6 +9,6 @@ public class Access : Pickup
 
     public override Item CreateItem()
     {
-        return new AccessItem(itemName, weightValue, doorID, oneUse);
+        return new AccessItem(id, itemName, weightValue, doorID, oneUse);
     }
 }

@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0fe6f1b7c548149b563a752d71394d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 23
   itemName: Ancient Coin
   weightValue: 100
   points: 8500
@@ -293,7 +294,7 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &348139253 stripped
 GameObject:
@@ -313,21 +314,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialMaxWeight: 120
---- !u!114 &348139255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348139253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 963e8debff772ea43bca9948c0302e30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalSpeed: 5
-  runSpeed: 9
-  jumpHeight: 120
 --- !u!1 &592313267
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +328,7 @@ GameObject:
   - component: {fileID: 592313269}
   - component: {fileID: 592313268}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,9 +346,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2d503315d351d4c8bb0f5436a66a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 10
   itemName: Silver Key
   weightValue: 10
   doorID: 0
+  oneUse: 1
 --- !u!65 &592313269
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -433,11 +421,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592313267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.61, y: 0.3, z: -4.47}
+  m_LocalPosition: {x: 3.98, y: 0.3, z: -4.52}
   m_LocalScale: {x: 0.172216, y: 0.578, z: 0.150212}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -529,7 +517,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -160, z: 0}
 --- !u!1001 &799281191
 PrefabInstance:
@@ -552,7 +540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6721280246776550171, guid: 70650cea5bce0bc46850c99c32fb3e3c, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6721280246776550171, guid: 70650cea5bce0bc46850c99c32fb3e3c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -609,7 +597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6721280246776550171, guid: 70650cea5bce0bc46850c99c32fb3e3c, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6721280246776550171, guid: 70650cea5bce0bc46850c99c32fb3e3c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -685,6 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0fe6f1b7c548149b563a752d71394d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 21
   itemName: Popsicle
   weightValue: 5
   points: 200
@@ -758,11 +747,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181631162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.87, y: 0.34, z: -4.75}
+  m_LocalPosition: {x: -3.34, y: 0.34, z: -3.2}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1490901235
 GameObject:
@@ -860,7 +849,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 2.8272}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1490901240
 BoxCollider:
@@ -981,11 +970,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753212718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.79, y: 0.34, z: -4.75}
+  m_LocalPosition: {x: -3.48, y: 0.34, z: -1.51}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1753212723
 MonoBehaviour:
@@ -999,6 +988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0fe6f1b7c548149b563a752d71394d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 22
   itemName: Coconut
   weightValue: 25
   points: 2000
@@ -1016,7 +1006,7 @@ GameObject:
   - component: {fileID: 1775691325}
   - component: {fileID: 1775691324}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Key (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,9 +1024,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2d503315d351d4c8bb0f5436a66a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 11
   itemName: Silver Key
   weightValue: 10
   doorID: 1
+  oneUse: 1
 --- !u!65 &1775691325
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1107,11 +1099,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775691323}
   m_LocalRotation: {x: -0, y: 0.19664568, z: -0, w: 0.9804746}
-  m_LocalPosition: {x: 3.37, y: 0.3, z: -7.39}
+  m_LocalPosition: {x: 3.76, y: 0.3, z: -11.21}
   m_LocalScale: {x: 0.196072, y: 0.54424, z: 0.165024}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 22.682, z: 0}
 --- !u!1001 &1888151442
 PrefabInstance:
@@ -1126,7 +1118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalScale.y
@@ -1218,6 +1210,49 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+--- !u!1 &1949221606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1949221608}
+  - component: {fileID: 1949221607}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1949221607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949221606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4292eb267023b504d93144bbec86f4db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1949221608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949221606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2051922595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,5 +1294,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

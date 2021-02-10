@@ -23,21 +23,21 @@ public class TestScript : MonoBehaviour
     public void TestCreateAccessItem()
     {
         // Make an Item, not accessitem, because then is the same type as the rest of the items
-        Item key = new AccessItem("Gold Key", 10, 0, false);
+        Item key = new AccessItem(4324214, "Gold Key", 10, 0, false);
         DebugLogItem(key);
     }
 
     public void TestCreateBonusItem()
     {
-        Item candy = new BonusItem("Chocolate Bar", 2, 250);
+        Item candy = new BonusItem(121121, "Chocolate Bar", 2, 250);
         DebugLogItem(candy);
     }
 
     public void TestInventoryFunction()
     {
-        Item key = new AccessItem("Gold Key", 20, 0, false);
-        Item chocolateBar = new BonusItem("Chocolate Bar", 60, 250);
-        Item popsicle = new BonusItem("Popsicle", 50, 100);
+        Item key = new AccessItem(4883939, "Gold Key", 20, 0, false);
+        Item chocolateBar = new BonusItem(9, "Chocolate Bar", 60, 250);
+        Item popsicle = new BonusItem(96655, "Popsicle", 50, 100);
 
         if (inventory.AddItem(key))
         {

@@ -47,6 +47,19 @@ public class InventoryScript
         return success;
     }
 
+    public Item GetItemWithID(int id)
+    {
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            if (Inventory[i].GetItemID() == id)
+            {
+                return Inventory[i];
+            }
+        }
+
+        return null;
+    }
+
     public bool HasItem(Item i)
     {
         return Inventory.Contains(i);

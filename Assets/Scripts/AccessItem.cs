@@ -7,7 +7,7 @@ public class AccessItem : Item
     int doorID;
     bool oneUse;
 
-    public AccessItem(string name, int weightValue, int doorID, bool oneUse) : base(name, weightValue)
+    public AccessItem(int id, string name, int weightValue, int doorID, bool oneUse) : base(id, name, weightValue)
     {
         this.doorID = doorID;
         this.oneUse = oneUse;

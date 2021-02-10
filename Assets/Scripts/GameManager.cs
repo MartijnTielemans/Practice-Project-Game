@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    Dictionary<string, Pickup> worldItems;
+    Dictionary<int, Pickup> worldItems = new Dictionary<int, Pickup>();
 
     // Singleton
     void Awake()
@@ -18,5 +18,22 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void RegisterPickupItem(Pickup item)
+    {
+        if (!worldItems.ContainsKey(item.id))
+        {
+            worldItems.Add(item.id, item);
+        }
+        else
+        {
+            Debug.LogError("There is already an object with this ID: " + item.id);
+        }
+    }
+
+    public void DropItem(int id, Vector3 position)
+    {
+        worldItems[id].Respawn(position);
     }
 }
