@@ -42,7 +42,20 @@ public class InventoryScript
         bool success = Inventory.Remove(i);
 
         if (success)
-            totalWeight += i.GetWeightValue();
+            totalWeight -= i.GetWeightValue();
+
+        return success;
+    }
+
+    public bool DropItem(Item i)
+    {
+        bool success = Inventory.Remove(i);
+
+        if (success)
+        {
+            totalWeight -= i.GetWeightValue();
+            // TODO: Add Item prefab spawn for Item i
+        }
 
         return success;
     }
@@ -60,9 +73,16 @@ public class InventoryScript
         {
             if (item is AccessItem)
             {
-                if (((AccessItem)item).OpensDoor(ID))
+                AccessItem i = ((AccessItem)item);
+
+                if (i.OpensDoor(ID))
                 {
                     result = true;
+
+                    if (i.GetOneUse())
+                    {
+                        RemoveItem(item);
+                    }
                 }
             }
         }
