@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Shoots a raycast that picks up item when hit
         if (Input.GetButtonDown("Interact"))
         {
             RaycastHit hit;
@@ -37,23 +38,68 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
+        // Drop the item in the selected slot
         if (Input.GetButtonDown("Drop"))
         {
-            DropItem(10);
+            Debug.Log("Dropped Item");
+            DropItem(GameManager.Instance.selectedSlotID);
+        }
+
+        // For switching selected inventory slots
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GameManager.Instance.selectedSlotID = 0;
+            GameManager.Instance.CheckSlotId();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            GameManager.Instance.selectedSlotID = 1;
+            GameManager.Instance.CheckSlotId();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GameManager.Instance.selectedSlotID = 2;
+            GameManager.Instance.CheckSlotId();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            GameManager.Instance.selectedSlotID = 3;
+            GameManager.Instance.CheckSlotId();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            GameManager.Instance.selectedSlotID = 4;
+            GameManager.Instance.CheckSlotId();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            GameManager.Instance.selectedSlotID = 5;
+            GameManager.Instance.CheckSlotId();
         }
     }
 
     public void DropItem(int id)
     {
-        Item i = inventory.GetItemWithID(id);
+        Item i = inventory.GetItemFromSlot(id);
+
+        // Search the inventory list for the specific id
 
         if (i != null)
         {
             if (inventory.RemoveItem(i))
             {
                 UpdateWeightText(weightText);
+                GameManager.Instance.DropItem(i.GetItemID(), transform.position + transform.forward * 2);
             }
-            GameManager.Instance.DropItem(id, transform.position + transform.forward * 2);
+        }
+        else
+        {
+            Debug.LogError("Could not the item at: " + id);
         }
     }
 

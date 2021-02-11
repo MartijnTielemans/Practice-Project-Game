@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 4437898170632879445}
   - component: {fileID: 7813431702534451881}
   - component: {fileID: 1484219759096021805}
+  - component: {fileID: 4288391744993421892}
   m_Layer: 5
   m_Name: Inventory Slot
   m_TagString: Untagged
@@ -297,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0.11106868, b: 0.3490566, a: 0.8235294}
+  m_EffectColor: {r: 0, g: 0, b: 0.3490566, a: 0.8235294}
   m_EffectDistance: {x: 10, y: -10}
   m_UseGraphicAlpha: 1
 --- !u!114 &1484219759096021805
@@ -313,5 +314,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  filled: 0
   itemImage: {fileID: 0}
   itemName: {fileID: 0}
+--- !u!95 &4288391744993421892
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813431702534451877}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f99b5823d635729469a41a67ff9eb800, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

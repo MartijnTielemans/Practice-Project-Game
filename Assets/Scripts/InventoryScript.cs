@@ -33,7 +33,7 @@ public class InventoryScript
             filledSlots++;
 
             // Add the image and name to the inventory hotbar
-            GameManager.Instance.AddToSlot(filledSlots, GameManager.Instance.GetItemSprite(i.GetItemID()), i.GetItemName());
+            GameManager.Instance.AddToSlot(GameManager.Instance.GetItemSprite(i.GetItemID()), i.GetItemName());
 
             Debug.Log("Current slots filled: " + filledSlots);
 
@@ -55,7 +55,8 @@ public class InventoryScript
             totalWeight -= i.GetWeightValue();
             filledSlots--;
 
-            // TODO: Get the selected slot, then remove the item image and name in that slot
+            // Get the selected slot, then remove the item image and name in that slot and set filled to false
+            GameManager.Instance.RemoveFromSlot(GameManager.Instance.selectedSlotID);
 
             Debug.Log("Current slots filled: " + filledSlots);
         }
@@ -124,6 +125,19 @@ public class InventoryScript
         foreach (Item item in Inventory)
         {
             Debug.Log(item.GetItemName() + " - " + item.GetWeightValue());
+        }
+    }
+
+    // Gets an item from the slot id
+    public Item GetItemFromSlot(int id)
+    {
+        if (id >= 0 && id < Inventory.Count)
+        {
+            return Inventory[id];
+        }
+        else
+        {
+            return null;
         }
     }
 }
