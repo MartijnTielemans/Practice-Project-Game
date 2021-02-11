@@ -6,7 +6,7 @@ public class BonusItem : Item
 {
     int pointValue;
 
-    public BonusItem(int id, string name, int weightValue, Sprite image, int pointValue) : base(id, name, weightValue, image)
+    public BonusItem(int id, string name, int weightValue, int pointValue) : base(id, name, weightValue)
     {
         this.pointValue = pointValue;
     }

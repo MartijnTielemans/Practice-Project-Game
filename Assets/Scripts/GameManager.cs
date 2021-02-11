@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
         if (!inventorySlots.ContainsKey(slot.id))
         {
             inventorySlots.Add(slot.id, slot);
-            Debug.Log("Added a slot with ID: " + slot.id);
         }
         else
         {
@@ -52,8 +51,25 @@ public class GameManager : MonoBehaviour
         worldItems[id].Respawn(position);
     }
 
-    public void AddToSlot(int id, Sprite i, string name)
+    public void AddToSlot(int id, Sprite image, string name)
     {
-        inventorySlots[id].AddToSlot(i, name);
+        inventorySlots[id].AddToSlot(image, name);
+    }
+
+    public void RemoveFromSlot(int id)
+    {
+        inventorySlots[id].RemoveFromSlot();
+    }
+
+    public Sprite GetItemSprite(int id)
+    {
+        if (worldItems.ContainsKey(id))
+        {
+            return worldItems[id].itemImage;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

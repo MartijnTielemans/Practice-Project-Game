@@ -8,10 +8,9 @@ public abstract class Item
     int id;
     string name;
     int weightValue;
-    Sprite itemImage;
 
     //Constructor
-    protected Item(int id, string name, int weightValue, Sprite image)
+    protected Item(int id, string name, int weightValue)
     {
         this.id = id;
         this.name = name;
@@ -38,10 +37,5 @@ public abstract class Item
     public int GetWeightValue()
     {
         return weightValue;
-    }
-
-    public Sprite GetItemImage()
-    {
-        return itemImage;
     }
 }

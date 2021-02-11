@@ -8,7 +8,7 @@ public class InventoryScript
 
     int totalWeight;
     private int maxWeight;
-    int filledSlots;
+    int filledSlots = 0;
     private int maxSlots = 6;
 
     public InventoryScript()
@@ -32,10 +32,8 @@ public class InventoryScript
             totalWeight += i.GetWeightValue();
             filledSlots++;
 
-            // Get the slot with the right id
-            GameManager.Instance.AddToSlot(filledSlots, i.GetItemImage(), i.GetItemName());
-
-            // Call AddToSlot in that slot
+            // Add the image and name to the inventory hotbar
+            GameManager.Instance.AddToSlot(filledSlots, GameManager.Instance.GetItemSprite(i.GetItemID()), i.GetItemName());
 
             Debug.Log("Current slots filled: " + filledSlots);
 
@@ -56,6 +54,8 @@ public class InventoryScript
         {
             totalWeight -= i.GetWeightValue();
             filledSlots--;
+
+            // TODO: Get the selected slot, then remove the item image and name in that slot
 
             Debug.Log("Current slots filled: " + filledSlots);
         }

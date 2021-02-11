@@ -8,7 +8,6 @@ public abstract class Pickup : MonoBehaviour, IInteractable
     public int id;
     public string itemName;
     public int weightValue;
-
     public Sprite itemImage;
 
     void Start()
