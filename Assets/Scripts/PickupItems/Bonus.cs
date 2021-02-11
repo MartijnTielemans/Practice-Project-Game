@@ -8,6 +8,6 @@ public class Bonus : Pickup
 
     public override Item CreateItem()
     {
-        return new BonusItem(id, itemName, weightValue, points);
+        return new BonusItem(id, itemName, weightValue, itemImage, points);
     }
 }

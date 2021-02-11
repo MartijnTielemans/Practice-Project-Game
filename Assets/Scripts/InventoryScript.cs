@@ -32,6 +32,11 @@ public class InventoryScript
             totalWeight += i.GetWeightValue();
             filledSlots++;
 
+            // Get the slot with the right id
+            GameManager.Instance.AddToSlot(filledSlots, i.GetItemImage(), i.GetItemName());
+
+            // Call AddToSlot in that slot
+
             Debug.Log("Current slots filled: " + filledSlots);
 
             return true;
