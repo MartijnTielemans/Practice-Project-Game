@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -83,11 +81,9 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void DropItem(int id)
+    public void DropItem(int slot)
     {
-        Item i = inventory.GetItemFromSlot(id);
-
-        // Search the inventory list for the specific id
+        Item i = inventory.GetItemFromSlot(slot);
 
         if (i != null)
         {
@@ -99,7 +95,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Could not the item at: " + id);
+            Debug.LogError("Could not the item at: " + slot);
         }
     }
 
