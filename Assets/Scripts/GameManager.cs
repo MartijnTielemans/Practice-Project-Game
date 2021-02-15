@@ -90,19 +90,26 @@ public class GameManager : MonoBehaviour
     // Removes the selected item from its slot, then updates the rest of the slots
     public void RemoveFromSlot()
     {
-        for (int i = selectedSlotIndex; i < maximumSlots--; i++)
+        for (int i = selectedSlotIndex; i < maximumSlots; i++)
         {
             int id = player.GetInventory().GetInventory()[i].GetItemID();
             Pickup item = worldItems[id];
 
-            Debug.Log("Item id: " + item.id);
+            // if the next slot is filled, add tat item tot his slot, if not, remove the items from this slot
+            if (i < maximumSlots && inventorySlots[i].filled)
+            {
+                inventorySlots[i].AddToSlot(GetItemSprite(item.id), item.itemName);
+                Debug.Log("1");
+            }
+            else
+            {
+                Debug.Log("2");
 
-            //inventorySlots[i].RemoveFromSlot();
-
-            AddToSlot(GetItemSprite(item.id), item.itemName);
+                inventorySlots[i].RemoveFromSlot();
+            }
         }
 
-        inventorySlots[maximumSlots].RemoveFromSlot();
+        Debug.Log("3");
 
         for (int i = 0; i < player.GetInventory().GetInventory().Count; i++)
         {

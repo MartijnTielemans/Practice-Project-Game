@@ -90,6 +90,7 @@ public class PlayerManager : MonoBehaviour
             {
                 UpdateWeightText(weightText);
                 GameManager.Instance.DropItem(i.GetItemID(), transform.position + transform.forward * 2);
+                Debug.Log("Dropped Item");
             }
         }
         else
