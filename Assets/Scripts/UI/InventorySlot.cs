@@ -47,7 +47,7 @@ public class InventorySlot : MonoBehaviour
     public void ChangeSprite()
     {
         // Check if the currently selected slot id the same as this one
-        if (GameManager.Instance.selectedSlotID == id)
+        if (GameManager.Instance.selectedSlotIndex == id)
         {
             // Change to active
             anim.SetBool("Selected", true);

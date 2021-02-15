@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
     Dictionary<int, Pickup> worldItems = new Dictionary<int, Pickup>();
     Dictionary<int, InventorySlot> inventorySlots = new Dictionary<int, InventorySlot>();
 
-    public int selectedSlotID = 0;
-    int maximumSlots = 6;
+    public PlayerManager player;
+
+    public int selectedSlotIndex = 0;
+    int maximumSlots = 5;
 
     // Singleton
     void Awake()
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        selectedSlotID = 0;
+        selectedSlotIndex = 0;
     }
 
     public void RegisterPickupItem(Pickup item)
@@ -61,15 +63,15 @@ public class GameManager : MonoBehaviour
 
     public void AddToSlot(Sprite image, string name)
     {
-        // Check if the selected slot is full
-        if (!inventorySlots[selectedSlotID].filled)
+        // Check if the first slot is full
+        if (!inventorySlots[0].filled)
         {
-            inventorySlots[selectedSlotID].AddToSlot(image, name);
+            inventorySlots[0].AddToSlot(image, name);
         }
         // If it is full, go to the next slot, and repeat that process
         else
         {
-            int slotId = selectedSlotID;
+            int slotId = 0;
 
             do
             {
@@ -77,7 +79,7 @@ public class GameManager : MonoBehaviour
 
                 // It cannot be over six
                 if (slotId > maximumSlots)
-                    slotId = 1;
+                    slotId = 0;
 
             } while (inventorySlots[slotId].filled);
 
@@ -85,9 +87,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RemoveFromSlot(int id)
+    // Removes the selected item from its slot, then updates the rest of the slots
+    public void RemoveFromSlot()
     {
-        inventorySlots[selectedSlotID].RemoveFromSlot();
+        for (int i = selectedSlotIndex; i < maximumSlots--; i++)
+        {
+            int id = player.GetInventory().GetInventory()[i].GetItemID();
+            Pickup item = worldItems[id];
+
+            Debug.Log("Item id: " + item.id);
+
+            //inventorySlots[i].RemoveFromSlot();
+
+            AddToSlot(GetItemSprite(item.id), item.itemName);
+        }
+
+        inventorySlots[maximumSlots].RemoveFromSlot();
+
+        for (int i = 0; i < player.GetInventory().GetInventory().Count; i++)
+        {
+            Debug.Log("inventory " + i + " = " + player.GetInventory().GetInventory()[i].GetItemName());
+        }
     }
 
     // Gets the sprite of the added item

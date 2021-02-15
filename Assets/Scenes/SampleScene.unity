@@ -2770,7 +2770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4292eb267023b504d93144bbec86f4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedSlotID: 0
+  player: {fileID: 348139254}
+  selectedSlotIndex: 0
 --- !u!4 &1949221608
 Transform:
   m_ObjectHideFlags: 0

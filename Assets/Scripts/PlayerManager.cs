@@ -39,44 +39,43 @@ public class PlayerManager : MonoBehaviour
         // Drop the item in the selected slot
         if (Input.GetButtonDown("Drop"))
         {
-            Debug.Log("Dropped Item");
-            DropItem(GameManager.Instance.selectedSlotID);
+            DropItem(GameManager.Instance.selectedSlotIndex);
         }
 
         // For switching selected inventory slots
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            GameManager.Instance.selectedSlotID = 0;
+            GameManager.Instance.selectedSlotIndex = 0;
             GameManager.Instance.CheckSlotId();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            GameManager.Instance.selectedSlotID = 1;
+            GameManager.Instance.selectedSlotIndex = 1;
             GameManager.Instance.CheckSlotId();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            GameManager.Instance.selectedSlotID = 2;
+            GameManager.Instance.selectedSlotIndex = 2;
             GameManager.Instance.CheckSlotId();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            GameManager.Instance.selectedSlotID = 3;
+            GameManager.Instance.selectedSlotIndex = 3;
             GameManager.Instance.CheckSlotId();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            GameManager.Instance.selectedSlotID = 4;
+            GameManager.Instance.selectedSlotIndex = 4;
             GameManager.Instance.CheckSlotId();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            GameManager.Instance.selectedSlotID = 5;
+            GameManager.Instance.selectedSlotIndex = 5;
             GameManager.Instance.CheckSlotId();
         }
     }

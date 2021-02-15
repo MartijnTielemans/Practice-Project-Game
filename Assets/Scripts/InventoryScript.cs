@@ -9,7 +9,7 @@ public class InventoryScript
     int totalWeight;
     private int maxWeight;
     int filledSlots = 0;
-    private int maxSlots = 6;
+    private int maxSlots = 5;
 
     public InventoryScript()
     {
@@ -26,7 +26,7 @@ public class InventoryScript
     // Add an item to the inventory list, if it succeeded in finding it and it wouldn't exceed the maxWeight
     public bool AddItem(Item i)
     {
-        if ((totalWeight + i.GetWeightValue()) <= maxWeight && filledSlots < maxSlots)
+        if ((totalWeight + i.GetWeightValue()) <= maxWeight && filledSlots < maxSlots++)
         {
             Inventory.Add(i);
             totalWeight += i.GetWeightValue();
@@ -56,12 +56,17 @@ public class InventoryScript
             filledSlots--;
 
             // Get the selected slot, then remove the item image and name in that slot and set filled to false
-            GameManager.Instance.RemoveFromSlot(GameManager.Instance.selectedSlotID);
+            GameManager.Instance.RemoveFromSlot();
 
             Debug.Log("Current slots filled: " + filledSlots);
         }
 
         return success;
+    }
+
+    public List<Item> GetInventory()
+    {
+        return Inventory;
     }
 
     public Item GetItemWithID(int id)
