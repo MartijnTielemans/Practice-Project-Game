@@ -95,7 +95,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Could not the item at: " + slot);
+            Debug.LogError("Could not find the item at: " + slot);
         }
     }
 

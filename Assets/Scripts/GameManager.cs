@@ -92,12 +92,12 @@ public class GameManager : MonoBehaviour
     {
         for (int i = selectedSlotIndex; i < maximumSlots; i++)
         {
-            int id = player.GetInventory().GetInventory()[i].GetItemID();
-            Pickup item = worldItems[id];
-
-            // if the next slot is filled, add tat item tot his slot, if not, remove the items from this slot
-            if (i < maximumSlots && inventorySlots[i].filled)
+            // If the next slot is filled, add tat item tot his slot, if not, remove the items from this slot
+            if (i < player.GetInventory().GetInventory().Count)
             {
+                int itemId = player.GetInventory().GetInventory()[i].GetItemID();
+                Pickup item = worldItems[itemId];
+
                 inventorySlots[i].AddToSlot(GetItemSprite(item.id), item.itemName);
                 Debug.Log("1");
             }
