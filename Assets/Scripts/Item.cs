@@ -5,12 +5,14 @@ using UnityEngine;
 public abstract class Item
 {
     //Properties
+    int id;
     string name;
     int weightValue;
 
     //Constructor
-    protected Item(string name, int weightValue)
+    protected Item(int id, string name, int weightValue)
     {
+        this.id = id;
         this.name = name;
         this.weightValue = weightValue;
     }
@@ -22,6 +24,11 @@ public abstract class Item
     }
 
     //Methods
+    public int GetItemID()
+    {
+        return id;
+    }
+
     public string GetItemName()
     {
         return name;

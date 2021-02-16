@@ -8,6 +8,8 @@ public class InventoryScript
 
     int totalWeight;
     private int maxWeight;
+    int filledSlots = 0;
+    private int maxSlots = 5;
 
     public InventoryScript()
     {
@@ -24,10 +26,17 @@ public class InventoryScript
     // Add an item to the inventory list, if it succeeded in finding it and it wouldn't exceed the maxWeight
     public bool AddItem(Item i)
     {
-        if ((totalWeight + i.GetWeightValue()) <= maxWeight)
+        if ((totalWeight + i.GetWeightValue()) <= maxWeight && filledSlots < maxSlots++)
         {
             Inventory.Add(i);
             totalWeight += i.GetWeightValue();
+            filledSlots++;
+
+            // Add the image and name to the inventory hotbar
+            GameManager.Instance.AddToSlot(GameManager.Instance.GetItemSprite(i.GetItemID()), i.GetItemName());
+
+            Debug.Log("Current slots filled: " + filledSlots);
+
             return true;
         }
         else
@@ -42,9 +51,35 @@ public class InventoryScript
         bool success = Inventory.Remove(i);
 
         if (success)
-            totalWeight += i.GetWeightValue();
+        {
+            totalWeight -= i.GetWeightValue();
+            filledSlots--;
+
+            // Get the selected slot, then remove the item image and name in that slot and set filled to false
+            GameManager.Instance.RemoveFromSlot();
+
+            Debug.Log("Current slots filled: " + filledSlots);
+        }
 
         return success;
+    }
+
+    public List<Item> GetInventory()
+    {
+        return Inventory;
+    }
+
+    public Item GetItemWithID(int id)
+    {
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            if (Inventory[i].GetItemID() == id)
+            {
+                return Inventory[i];
+            }
+        }
+
+        return null;
     }
 
     public bool HasItem(Item i)
@@ -60,7 +95,9 @@ public class InventoryScript
         {
             if (item is AccessItem)
             {
-                if (((AccessItem)item).OpensDoor(ID))
+                AccessItem i = ((AccessItem)item);
+
+                if (i.OpensDoor(ID))
                 {
                     result = true;
                 }
@@ -80,6 +117,11 @@ public class InventoryScript
         return totalWeight;
     }
 
+    public int GetMaxWeight()
+    {
+        return maxWeight;
+    }
+
     public void DebugInventory()
     {
         Debug.Log("Inventory has: " + Inventory.Count + " items.");
@@ -88,6 +130,19 @@ public class InventoryScript
         foreach (Item item in Inventory)
         {
             Debug.Log(item.GetItemName() + " - " + item.GetWeightValue());
+        }
+    }
+
+    // Gets an item from the slot id
+    public Item GetItemFromSlot(int id)
+    {
+        if (id >= 0 && id < Inventory.Count)
+        {
+            return Inventory[id];
+        }
+        else
+        {
+            return null;
         }
     }
 }

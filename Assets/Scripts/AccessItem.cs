@@ -5,15 +5,22 @@ using UnityEngine;
 public class AccessItem : Item
 {
     int doorID;
+    bool oneUse;
 
-    public AccessItem(string name, int weightValue, int doorID) : base(name, weightValue)
+    public AccessItem(int id, string name, int weightValue, int doorID, bool oneUse) : base(id, name, weightValue)
     {
         this.doorID = doorID;
+        this.oneUse = oneUse;
     }
 
     public int GetDoorID()
     {
         return doorID;
+    }
+
+    public bool GetOneUse()
+    {
+        return oneUse;
     }
 
     public bool OpensDoor(int ID)
