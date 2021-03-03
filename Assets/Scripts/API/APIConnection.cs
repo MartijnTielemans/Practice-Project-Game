@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
+using TMPro;
 
 public class APIConnection : MonoBehaviour
 {
+    public TextMeshProUGUI idText;
+    public TextMeshProUGUI jokeText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +36,13 @@ public class APIConnection : MonoBehaviour
                     break;
 
                 case UnityWebRequest.Result.Success:
-                    var JsonObject = JSON.Parse(webRequest.downloadHandler.text);ure
+                    var JsonObject = JSON.Parse(webRequest.downloadHandler.text);
 
-                    Debug.Log("This Dad joke's ID is: " + JsonObject["id"].Value);
+                    //Debug.Log("This Dad joke's ID is: " + JsonObject["id"].Value);
+
+                    // Store the id and the actual joke in the text
+                    jokeText.text = JsonObject["joke"].Value;
+                    idText.text = JsonObject["id"].Value;
                     break;
 
                 default:
