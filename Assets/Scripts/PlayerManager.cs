@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
         crossHair.SetActive(false);
 
         // Shoots a raycast that shows a crosshair on interactable hit
-        if (Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, 2))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 2))
         {
             IInteractable i = hit.collider.gameObject.GetComponent<IInteractable>();
             if (i != null)
