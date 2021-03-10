@@ -11,6 +11,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     int initialMaxWeight = 120;
 
+    public GameObject crossHair;
+
+    RaycastHit hit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,15 +25,18 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Shoots a raycast that picks up item when hit
-        if (Input.GetButtonDown("Interact"))
-        {
-            RaycastHit hit;
+        crossHair.SetActive(false);
 
-            if (Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, 2))
+        // Shoots a raycast that shows a crosshair on interactable hit
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 2))
+        {
+            IInteractable i = hit.collider.gameObject.GetComponent<IInteractable>();
+            if (i != null)
             {
-                IInteractable i = hit.collider.gameObject.GetComponent<IInteractable>();
-                if (i != null)
+                crossHair.SetActive(true);
+
+                // press interact to interact with the object
+                if (Input.GetButtonDown("Interact"))
                 {
                     i.Action(this);
                 }
