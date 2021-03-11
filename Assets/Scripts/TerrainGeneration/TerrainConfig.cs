@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TerrainConfig : MonoBehaviour
 {
+    public bool autoUpdate = false;
+
     public Vector2Int size = new Vector2Int(512, 512);
     [Range(0.003f, 0.01f)]
     public float scale = 0.005f;
@@ -19,7 +21,7 @@ public class TerrainConfig : MonoBehaviour
 
     private void Start()
     {
-        UpdateTerrainData(GenerateTerrainData());
+        //UpdateTerrainData(GenerateTerrainData());
     }
 
     float[,] GenerateTerrainData()
@@ -35,6 +37,7 @@ public class TerrainConfig : MonoBehaviour
     // Generate the texture anew on validation
     private void OnValidate()
     {
+        if (autoUpdate)
         UpdateTerrainData(GenerateTerrainData());
     }
 }
