@@ -102,13 +102,13 @@ public static class TerrainGenerator
             }
         }
 
-        //for (int y = 0; y < height; y++)
-        //{
-        //    for (int x = 0; x < width; x++)
-        //    {
-        //        result[x, y] = Mathf.InverseLerp(minValue, maxValue, result[x, y]*baseAmplitude);
-        //    }
-        //}
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                result[x, y] = Mathf.InverseLerp(minValue, maxValue, result[x, y] * baseAmplitude);
+            }
+        }
 
         return result;
     }
