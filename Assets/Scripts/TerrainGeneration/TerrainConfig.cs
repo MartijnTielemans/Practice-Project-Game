@@ -9,7 +9,7 @@ public class TerrainConfig : MonoBehaviour
     public Vector2Int size = new Vector2Int(512, 512);
     [Range(0.003f, 0.01f)]
     public float scale = 0.005f;
-    [Range(0.05f, 1)]
+    [Range(0.05f, 2)]
     public float baseAmplitude = 1f;
     [Range(1, 10)]
     public int octaves = 4;

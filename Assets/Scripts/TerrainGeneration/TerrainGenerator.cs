@@ -118,13 +118,13 @@ public static class TerrainGenerator
     {
         public string layerName;
         public float heightTrigger;
-        public float fadeAmount;
+        public Material material;
 
-        public LayerData(string layerName, float heightTrigger, float fadeAmount)
+        public LayerData(string layerName, float heightTrigger, Material material)
         {
             this.layerName = layerName;
             this.heightTrigger = heightTrigger;
-            this.fadeAmount = fadeAmount;
+            this.material = material;
         }
     }
 
@@ -146,19 +146,19 @@ public static class TerrainGenerator
 
                     if (l == 0)
                     {
-                        mapValue = Mathf.Clamp (MapUtil.Map(value, layers[l].heightTrigger, layers[l].heightTrigger + layers[l].fadeAmount, 1, 0), 0, 1);
+                        mapValue = Mathf.Clamp (MapUtil.Map(value, layers[l].heightTrigger, layers[l].heightTrigger, 1, 0), 0, 1);
                     }
                     else
                     {
                         if (value > layers[l].heightTrigger)
                         {
                             // Fade up
-                            mapValue = Mathf.Clamp(MapUtil.Map(value, layers[l].heightTrigger, layers[l].heightTrigger + layers[l].fadeAmount, 1, 0), 0, 1);
+                            mapValue = Mathf.Clamp(MapUtil.Map(value, layers[l].heightTrigger, layers[l].heightTrigger, 1, 0), 0, 1);
                         }
-                        else if (value < layers[l-1].heightTrigger + layers[l-1].fadeAmount)
+                        else if (value < layers[l-1].heightTrigger)
                         {
                             // Fade down
-                            mapValue = Mathf.Clamp(MapUtil.Map(value, layers[l-1].heightTrigger, layers[l-1].heightTrigger + layers[l-1].fadeAmount, 0, 1), 0, 1);
+                            mapValue = Mathf.Clamp(MapUtil.Map(value, layers[l-1].heightTrigger, layers[l-1].heightTrigger, 0, 1), 0, 1);
                         }
                         else
                         {
