@@ -5,6 +5,7 @@ using UnityEngine;
 public class DoorScript : MonoBehaviour, IInteractable
 {
     public int doorID = 0;
+    public bool noKey = false;
 
     Animator anim;
     BoxCollider triggerBox;
@@ -19,7 +20,7 @@ public class DoorScript : MonoBehaviour, IInteractable
 
     public void Action(PlayerManager player)
     {
-        if (player.GetInventory().CanOpenDoor(doorID))
+        if (player.GetInventory().CanOpenDoor(doorID, noKey))
         {
             anim.SetBool("Open", true);
             triggerBox.enabled = false;

@@ -87,21 +87,28 @@ public class InventoryScript
         return Inventory.Contains(i);
     }
 
-    public bool CanOpenDoor(int ID)
+    public bool CanOpenDoor(int ID, bool noKey)
     {
         bool result = false;
 
-        foreach (Item item in Inventory)
+        if (!noKey)
         {
-            if (item is AccessItem)
+            foreach (Item item in Inventory)
             {
-                AccessItem i = ((AccessItem)item);
-
-                if (i.OpensDoor(ID))
+                if (item is AccessItem)
                 {
-                    result = true;
+                    AccessItem i = ((AccessItem)item);
+
+                    if (i.OpensDoor(ID))
+                    {
+                        result = true;
+                    }
                 }
             }
+        }
+        else if (noKey)
+        {
+            result = true;
         }
 
         return result;
