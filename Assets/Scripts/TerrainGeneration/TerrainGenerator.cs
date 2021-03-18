@@ -59,7 +59,7 @@ public static class TerrainGenerator
                     multiplier = MapUtil.Map(d, innerRadius, outerRadius, 1, 0);
                 }
 
-                // manipulate the point by useing the multiplier
+                // manipulate the point by using the multiplier
                 data[x, y] *= multiplier;
             }
         }
