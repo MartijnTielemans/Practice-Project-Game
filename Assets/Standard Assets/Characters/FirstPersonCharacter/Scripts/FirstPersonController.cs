@@ -28,6 +28,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 
+        [Header("For UnderWater Control")]
+        [SerializeField] float waterWalkSpeed;
+        [SerializeField] float waterRunSpeed;
+        [SerializeField] float waterJumpSpeed;
+        [SerializeField] float waterGravity;
+
         private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
@@ -42,6 +48,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        float normalWalkSpeed;
+        float normalRunSpeed;
+        float normalJumpSpeed;
+        float normalGravityMultiplier;
+
         // Use this for initialization
         private void Start()
         {
@@ -55,6 +66,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            normalWalkSpeed = m_WalkSpeed;
+            normalRunSpeed = m_RunSpeed;
+            normalJumpSpeed = m_JumpSpeed;
+            normalGravityMultiplier = m_GravityMultiplier;
         }
 
 
@@ -218,6 +234,29 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 return;
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
+        }
+
+        // Upon entering water, slow down the character and jumps become higher
+        private void OnTriggerEnter(Collider col)
+        {
+            if (col.gameObject.CompareTag("Water"))
+            {
+                m_WalkSpeed = waterWalkSpeed;
+                m_RunSpeed = waterRunSpeed;
+                m_JumpSpeed = waterJumpSpeed;
+                m_GravityMultiplier = waterGravity;
+            }
+        }
+
+        private void OnTriggerExit(Collider col)
+        {
+            if (col.gameObject.CompareTag("Water"))
+            {
+                m_WalkSpeed = normalWalkSpeed;
+                m_RunSpeed = normalRunSpeed;
+                m_JumpSpeed = normalJumpSpeed;
+                m_GravityMultiplier = normalGravityMultiplier;
+            }
         }
     }
 }
