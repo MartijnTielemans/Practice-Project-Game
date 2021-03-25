@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
@@ -33,6 +34,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] float waterRunSpeed;
         [SerializeField] float waterJumpSpeed;
         [SerializeField] float waterGravity;
+        public Volume[] volumes;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -246,6 +248,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_JumpSpeed = waterJumpSpeed;
                 m_GravityMultiplier = waterGravity;
             }
+            else if (col.gameObject.CompareTag("Underwater"))
+            {
+                volumes[0].weight = 0;
+                volumes[1].weight = 1;
+            }
         }
 
         private void OnTriggerExit(Collider col)
@@ -256,6 +263,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_RunSpeed = normalRunSpeed;
                 m_JumpSpeed = normalJumpSpeed;
                 m_GravityMultiplier = normalGravityMultiplier;
+            }
+            else if (col.gameObject.CompareTag("Underwater"))
+            {
+                volumes[0].weight = 1;
+                volumes[1].weight = 0;
             }
         }
     }
