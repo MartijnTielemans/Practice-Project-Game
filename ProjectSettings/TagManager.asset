@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactable
+  - Water
+  - Underwater
+  - Moving Platform
+  - RaftPart
   layers:
   - Default
   - TransparentFX
