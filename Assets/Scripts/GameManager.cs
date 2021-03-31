@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public PlayerManager player;
 
     public int selectedSlotIndex = 0;
-    int maximumSlots = 5;
+    int maximumSlots = 6;
 
     public AudioSource dropSound;
 
@@ -72,59 +72,41 @@ public class GameManager : MonoBehaviour
         dropSound.Play();
     }
 
-    public void AddToSlot(Sprite image, string name)
+    public bool AddToSlot(Sprite image, string name)
     {
-        // Check if the first slot is full
-        if (!inventorySlots[0].filled)
+        for (int i = 0; i < maximumSlots; i++)
         {
-            inventorySlots[0].AddToSlot(image, name);
-        }
-        // If it is full, go to the next slot, and repeat that process
-        else
-        {
-            int slotId = 0;
-
-            do
+            if (!inventorySlots[i].filled)
             {
-                slotId++;
-
-                // It cannot be over six
-                if (slotId > maximumSlots)
-                    slotId = 0;
-
-            } while (inventorySlots[slotId].filled);
-
-            inventorySlots[slotId].AddToSlot(image, name);
+                inventorySlots[i].AddToSlot(image, name);
+                return true;
+            }
         }
+
+        return false;
     }
 
-    // Removes the selected item from its slot, then updates the rest of the slots
-    public void RemoveFromSlot()
+    public void ClearSlots()
     {
-        for (int i = selectedSlotIndex; i < maximumSlots; i++)
+        for (int i = 0; i < maximumSlots; i++)
         {
-            // If the next slot is filled, add that item to this slot, if not, remove the items from this slot
-            if (i < player.GetInventory().GetInventory().Count)
+            if (inventorySlots[i].filled)
             {
-                int itemId = player.GetInventory().GetInventory()[i].GetItemID();
-                Pickup item = worldItems[itemId];
-
-                inventorySlots[i].AddToSlot(GetItemSprite(item.id), item.itemName);
-                Debug.Log("1");
-            }
-            else
-            {
-                Debug.Log("2");
-
                 inventorySlots[i].RemoveFromSlot();
             }
         }
+    }
 
-        Debug.Log("3");
+    public void UpdateSlots()
+    {
+        ClearSlots();
 
         for (int i = 0; i < player.GetInventory().GetInventory().Count; i++)
         {
-            Debug.Log("inventory " + i + " = " + player.GetInventory().GetInventory()[i].GetItemName());
+            int itemId = player.GetInventory().GetInventory()[i].GetItemID();
+            Pickup item = worldItems[itemId];
+
+            inventorySlots[i].AddToSlot(GetItemSprite(item.id), item.itemName);
         }
     }
 
