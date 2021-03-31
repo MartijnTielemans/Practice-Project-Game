@@ -7,12 +7,16 @@ public class RaftPartCheck : MonoBehaviour
     public int raftPartsNeeded;
     public int raftParts;
 
+    public AudioSource correctSound;
+
+    public float endingTimer = 1f;
+
     private void Update()
     {
         if (raftParts >= raftPartsNeeded)
         {
-            // TODO: Trigger ending sequence
             Debug.Log("Raft Parts collected");
+            GameManager.Instance.StartEnding(endingTimer);
         }
     }
 
@@ -28,6 +32,7 @@ public class RaftPartCheck : MonoBehaviour
             if (ID >= 200 && ID <= 299)
             {
                 Debug.Log("Added Raft Part.");
+                correctSound.Play();
                 raftParts++;
 
                 part.GetComponent<BoxCollider>().enabled = false;

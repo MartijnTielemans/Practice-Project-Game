@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,14 @@ public class GameManager : MonoBehaviour
     public PlayerManager player;
 
     public int selectedSlotIndex = 0;
-    int maximumSlots = 5;
+    int maximumSlots = 6;
+
+    public AudioSource dropSound;
+
+    [Header("For Ending Sequence")]
+    public GameObject fade;
+    public TextMeshProUGUI text1;
+    public TextMeshProUGUI text2;
 
     // Singleton
     void Awake()
@@ -59,61 +67,46 @@ public class GameManager : MonoBehaviour
     public void DropItem(int id, Vector3 position)
     {
         worldItems[id].Respawn(position);
+
+        // Play a funny sound
+        dropSound.Play();
     }
 
-    public void AddToSlot(Sprite image, string name)
+    public bool AddToSlot(Sprite image, string name)
     {
-        // Check if the first slot is full
-        if (!inventorySlots[0].filled)
+        for (int i = 0; i < maximumSlots; i++)
         {
-            inventorySlots[0].AddToSlot(image, name);
-        }
-        // If it is full, go to the next slot, and repeat that process
-        else
-        {
-            int slotId = 0;
-
-            do
+            if (!inventorySlots[i].filled)
             {
-                slotId++;
-
-                // It cannot be over six
-                if (slotId > maximumSlots)
-                    slotId = 0;
-
-            } while (inventorySlots[slotId].filled);
-
-            inventorySlots[slotId].AddToSlot(image, name);
-        }
-    }
-
-    // Removes the selected item from its slot, then updates the rest of the slots
-    public void RemoveFromSlot()
-    {
-        for (int i = selectedSlotIndex; i < maximumSlots; i++)
-        {
-            // If the next slot is filled, add tat item tot his slot, if not, remove the items from this slot
-            if (i < player.GetInventory().GetInventory().Count)
-            {
-                int itemId = player.GetInventory().GetInventory()[i].GetItemID();
-                Pickup item = worldItems[itemId];
-
-                inventorySlots[i].AddToSlot(GetItemSprite(item.id), item.itemName);
-                Debug.Log("1");
+                inventorySlots[i].AddToSlot(image, name);
+                return true;
             }
-            else
-            {
-                Debug.Log("2");
+        }
 
+        return false;
+    }
+
+    public void ClearSlots()
+    {
+        for (int i = 0; i < maximumSlots; i++)
+        {
+            if (inventorySlots[i].filled)
+            {
                 inventorySlots[i].RemoveFromSlot();
             }
         }
+    }
 
-        Debug.Log("3");
+    public void UpdateSlots()
+    {
+        ClearSlots();
 
         for (int i = 0; i < player.GetInventory().GetInventory().Count; i++)
         {
-            Debug.Log("inventory " + i + " = " + player.GetInventory().GetInventory()[i].GetItemName());
+            int itemId = player.GetInventory().GetInventory()[i].GetItemID();
+            Pickup item = worldItems[itemId];
+
+            inventorySlots[i].AddToSlot(GetItemSprite(item.id), item.itemName);
         }
     }
 
@@ -137,5 +130,27 @@ public class GameManager : MonoBehaviour
         {
             inventorySlots[i.Key].ChangeSprite();
         }
+    }
+
+    // For starting the coroutine
+    public void StartEnding(float timer)
+    {
+        StartCoroutine(EndingSequence(timer));
+    }
+
+    // Handles setting the fade and text for the ending
+    public IEnumerator EndingSequence(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+
+        fade.GetComponent<Animator>().SetBool("FadeIn", true);
+
+        yield return new WaitForSeconds(timer);
+
+        text1.GetComponent<Animator>().SetBool("Show", true);
+
+        yield return new WaitForSeconds(timer);
+
+        text2.GetComponent<Animator>().SetBool("Show", true);
     }
 }

@@ -8,8 +8,6 @@ public class InventoryScript
 
     int totalWeight;
     private int maxWeight;
-    int filledSlots = 0;
-    private int maxSlots = 5;
 
     public InventoryScript()
     {
@@ -26,16 +24,10 @@ public class InventoryScript
     // Add an item to the inventory list, if it succeeded in finding it and it wouldn't exceed the maxWeight
     public bool AddItem(Item i)
     {
-        if ((totalWeight + i.GetWeightValue()) <= maxWeight && filledSlots < maxSlots++)
+        if ((totalWeight + i.GetWeightValue()) <= maxWeight && GameManager.Instance.AddToSlot(GameManager.Instance.GetItemSprite(i.GetItemID()), i.GetItemName()))
         {
             Inventory.Add(i);
             totalWeight += i.GetWeightValue();
-            filledSlots++;
-
-            // Add the image and name to the inventory hotbar
-            GameManager.Instance.AddToSlot(GameManager.Instance.GetItemSprite(i.GetItemID()), i.GetItemName());
-
-            Debug.Log("Current slots filled: " + filledSlots);
 
             return true;
         }
@@ -53,12 +45,9 @@ public class InventoryScript
         if (success)
         {
             totalWeight -= i.GetWeightValue();
-            filledSlots--;
 
             // Get the selected slot, then remove the item image and name in that slot and set filled to false
-            GameManager.Instance.RemoveFromSlot();
-
-            Debug.Log("Current slots filled: " + filledSlots);
+            GameManager.Instance.UpdateSlots();
         }
 
         return success;

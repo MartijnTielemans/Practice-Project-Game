@@ -9,6 +9,7 @@ public abstract class Pickup : MonoBehaviour, IInteractable
     public string itemName;
     public int weightValue;
     public Sprite itemImage;
+    public AudioSource pickupSound;
 
     void Start()
     {
@@ -19,7 +20,10 @@ public abstract class Pickup : MonoBehaviour, IInteractable
     public void Action(PlayerManager player)
     {
         if (player.AddItem(CreateItem()))
+        {
+            pickupSound.Play();
             Remove();
+        }
     }
 
     public void Remove()
