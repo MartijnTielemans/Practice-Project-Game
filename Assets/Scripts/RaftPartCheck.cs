@@ -7,12 +7,14 @@ public class RaftPartCheck : MonoBehaviour
     public int raftPartsNeeded;
     public int raftParts;
 
+    public float endingTimer = 1f;
+
     private void Update()
     {
         if (raftParts >= raftPartsNeeded)
         {
-            // TODO: Trigger ending sequence
             Debug.Log("Raft Parts collected");
+            GameManager.Instance.StartEnding(endingTimer);
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class GameManager : MonoBehaviour
 
     public int selectedSlotIndex = 0;
     int maximumSlots = 5;
+
+    [Header("For Ending Sequence")]
+    public GameObject fade;
+    public TextMeshProUGUI text1;
+    public TextMeshProUGUI text2;
 
     // Singleton
     void Awake()
@@ -137,5 +143,27 @@ public class GameManager : MonoBehaviour
         {
             inventorySlots[i.Key].ChangeSprite();
         }
+    }
+
+    // For starting the coroutine
+    public void StartEnding(float timer)
+    {
+        StartCoroutine(EndingSequence(timer));
+    }
+
+    // Handles setting the fade and text for the ending
+    public IEnumerator EndingSequence(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+
+        fade.GetComponent<Animator>().SetBool("FadeIn", true);
+
+        yield return new WaitForSeconds(timer);
+
+        text1.GetComponent<Animator>().SetBool("Show", true);
+
+        yield return new WaitForSeconds(timer);
+
+        text2.GetComponent<Animator>().SetBool("Show", true);
     }
 }
