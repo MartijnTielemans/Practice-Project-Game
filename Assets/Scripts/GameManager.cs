@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public int selectedSlotIndex = 0;
     int maximumSlots = 5;
 
+    public AudioSource dropSound;
+
     [Header("For Ending Sequence")]
     public GameObject fade;
     public TextMeshProUGUI text1;
@@ -65,6 +67,9 @@ public class GameManager : MonoBehaviour
     public void DropItem(int id, Vector3 position)
     {
         worldItems[id].Respawn(position);
+
+        // Play a funny sound
+        dropSound.Play();
     }
 
     public void AddToSlot(Sprite image, string name)
@@ -98,7 +103,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = selectedSlotIndex; i < maximumSlots; i++)
         {
-            // If the next slot is filled, add tat item tot his slot, if not, remove the items from this slot
+            // If the next slot is filled, add that item to this slot, if not, remove the items from this slot
             if (i < player.GetInventory().GetInventory().Count)
             {
                 int itemId = player.GetInventory().GetInventory()[i].GetItemID();

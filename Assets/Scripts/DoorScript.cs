@@ -7,6 +7,9 @@ public class DoorScript : MonoBehaviour, IInteractable
     public int doorID = 0;
     public bool noKey = false;
 
+    public AudioSource openSound;
+    public AudioSource lockSound;
+
     Animator anim;
     BoxCollider triggerBox;
 
@@ -24,12 +27,12 @@ public class DoorScript : MonoBehaviour, IInteractable
         {
             anim.SetBool("Open", true);
             triggerBox.enabled = false;
+            openSound.Play();
         }
         else
         {
             Debug.Log("Cannot open this door, it's ID is: " + doorID);
-
-            // TODO: Add a little sound to indicate the door is not opening
+            lockSound.Play();
         }
     }
 }
